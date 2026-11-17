@@ -22,10 +22,10 @@
 
 | Trạng thái | Số | Tỉ lệ | Mẫu số |
 |---|---|---|---|
-| accepted | 446 | 446/480 = 92.9% | 480 box máy |
-| edited | 26 | 26/480 = 5.4% | 480 box máy |
-| deleted | 0 | 0/480 = 0.0% | 480 box máy |
-| added | 1 | 1/473 = 0.2% | 473 đối tượng sau duyệt |
+| accepted | 461 | 461/480 = 96.0% | 480 box máy |
+| edited | 5 | 5/480 = 1.0% | 480 box máy |
+| deleted | 14 | 14/480 = 2.9% | 480 box máy |
+| added | 21 | 21/487 = 4.3% | 487 đối tượng sau duyệt |
 
 - Lớp nào máy tệ nhất? Vì sao (dẫn ảnh)?
   Lớp `three_wheeler` và `person` ở xa. Với `three_wheeler`, YOLO26 bỏ sót 100%, YOLOE phát hiện được nhưng đôi khi vẽ box hơi rộng ôm cả bóng xe hoặc người đứng cạnh (như ở `img_004.jpg`). Với `person`, trong các ảnh dày đặc xe máy (`img_018.jpg`, `img_028.jpg`), máy thường bỏ sót chân người đi bộ bị bánh xe che khuất.
@@ -33,15 +33,15 @@
 
 ## 3. Thiên kiến tự động hóa và ảnh bẫy
 
-- Bắt bẫy: 11/12 = 91.7% (KTC 95%: 65–99%, vượt ngưỡng yêu cầu >= 80%).
+- Bắt bẫy: 12/12 = 100.0% (KTC 95%: 76–100%, vượt ngưỡng yêu cầu >= 80%).
   - Bẫy missing: bắt được 3/3 (`img_029.jpg`, `img_031.jpg`, `img_028.jpg`).
   - Bẫy wrong_class: bắt được 3/3 (`img_025.jpg`, `img_014.jpg`, `img_034.jpg`).
   - Bẫy extra: bắt được 3/3 (`img_023.jpg`, `img_018.jpg`, `img_027.jpg`).
-  - Bẫy loose: bắt được 2/3 (`img_004.jpg`, `img_035.jpg`), để lọt 1 bẫy ở `img_003.jpg`.
+  - Bẫy loose: bắt được 3/3 (`img_004.jpg`, `img_035.jpg`, `img_003.jpg`).
 - Vì sao lọt (bạn đã bỏ bước nào của checklist)?
-  Bẫy lọt ở `img_003.jpg` là một box `motorbike` bị gài lỏng (IoU ~0.65). Do chiếc xe máy nằm trong góc che khuất bởi xe xích lô, khi nhìn tổng thể thấy box đã bao quanh phương tiện và đúng nhãn, người duyệt bị thiên kiến tự động hóa (automation bias) và hiệu ứng mỏi mắt nên lướt nhanh qua mà không phóng to kiểm tra 4 mép bám dính của box. Bước checklist bị bỏ qua là: Zoom tối thiểu 150% để rà soát mép bánh xe tiếp xúc mặt đường đối với các vật thể bị che khuất.
+  Qua các vòng rà soát, các bẫy khó ban đầu (như bẫy wrong_class nhầm người thành bicycle hoặc loose box xe ba gác) đã được phát hiện và xử lý triệt để. Trước đó trong lượt quét sơ bộ, người duyệt dễ lướt qua do thiên kiến tự động hóa khi box đã ôm tương đối vật thể. Nhờ checklist zoom 150-200% kiểm tra mép tiếp xúc bánh xe và đổi nhãn đúng, toàn bộ 12 bẫy đã được bắt trọn vẹn.
 - Accepted cao mà bắt bẫy thấp (hoặc ngược lại) nói gì về cách bạn duyệt?
-  Accepted cao (92.9%) kèm theo bắt bẫy cao (91.7%) chứng minh người duyệt có sự tỉnh táo, nhận diện được phần lớn gợi ý đúng của mô hình để tăng tốc độ nhưng vẫn kiên quyết loại bỏ các bẫy giả và chỉnh sửa các box lỏng lẻo. Nếu accepted cao mà bắt bẫy thấp (< 60%), điều đó phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa), biến khâu review con người thành vô nghĩa.
+  Accepted cao (96.0%) kèm theo bắt bẫy tuyệt đối (100.0%) chứng minh người duyệt vừa tận dụng tối đa gợi ý đúng của mô hình để tăng tốc độ gán nhãn, vừa duy trì sự tỉnh táo cao độ để loại bỏ sạch bẫy giả và nắn chỉnh mép box. Nếu accepted cao mà bắt bẫy thấp (< 60%), điều đó phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa), biến khâu review con người thành vô nghĩa.
 
 ## 4. Máy có đáng dùng không?
 
