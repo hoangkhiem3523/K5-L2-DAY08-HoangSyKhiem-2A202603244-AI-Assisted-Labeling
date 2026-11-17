@@ -29,7 +29,7 @@
 
 - Lớp nào máy tệ nhất? Vì sao (dẫn ảnh)?
   Lớp `three_wheeler` và `person` ở xa. Với `three_wheeler`, YOLO26 bỏ sót 100%, YOLOE phát hiện được nhưng đôi khi vẽ box hơi rộng ôm cả bóng xe hoặc người đứng cạnh (như ở `img_004.jpg`). Với `person`, trong các ảnh dày đặc xe máy (`img_018.jpg`, `img_028.jpg`), máy thường bỏ sót chân người đi bộ bị bánh xe che khuất.
-- So với gold: Precision / Recall của **máy**: Precision = 58.2% (KTC 95%: 46–69%), Recall = 86.7% (KTC 95%: 74–94%), mẫu số: 45 đối tượng gold.
+- So với gold: Precision / Recall của **máy**: Precision = 62.7% (KTC 95%: 51–73%), Recall = 87.5% (KTC 95%: 75–94%), mẫu số: 48 đối tượng gold.
 
 ## 3. Thiên kiến tự động hóa và ảnh bẫy
 

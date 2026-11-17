@@ -10,7 +10,7 @@ Mục tiêu recall: 90%. Ảnh dùng để quét: 4.
 | car | 0.5 | recall 100% (>= 90%), precision 62% (8 vật gold) |
 | bus | (mặc định) | chỉ 0 vật trong ảnh gold (< 5): mẫu quá ít, KHÔNG chọn ngưỡng theo lớp này, dùng ngưỡng mặc định |
 | truck | (mặc định) | không ngưỡng nào <= 0.5 đạt recall 90% (tối đa 20%, 5 vật): dùng ngưỡng mặc định, nói rõ trong báo cáo |
-| three_wheeler | (mặc định) | chỉ 0 vật trong ảnh gold (< 5): mẫu quá ít, KHÔNG chọn ngưỡng theo lớp này, dùng ngưỡng mặc định |
+| three_wheeler | (mặc định) | chỉ 3 vật trong ảnh gold (< 5): mẫu quá ít, KHÔNG chọn ngưỡng theo lớp này, dùng ngưỡng mặc định |
 
 Dán vào lệnh merge_prelabels (lớp không có trong chuỗi dùng `--conf` mặc định 0.3): `--thr "person=0.35,motorbike=0.35,car=0.5"`
 

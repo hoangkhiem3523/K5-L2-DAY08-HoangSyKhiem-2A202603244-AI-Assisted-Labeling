@@ -44,13 +44,13 @@
  },
  "gold": {
   "images": 4,
-  "gold_objects": 45,
+  "gold_objects": 48,
   "pre": {
-   "tp": 39,
-   "fp": 28,
+   "tp": 42,
+   "fp": 25,
    "fn": 6,
-   "precision": 0.582089552238806,
-   "recall": 0.8666666666666667
+   "precision": 0.6268656716417911,
+   "recall": 0.875
   },
   "final": null,
   "residual_errors": null,
