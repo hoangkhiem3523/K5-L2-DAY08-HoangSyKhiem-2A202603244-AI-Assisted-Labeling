@@ -33,15 +33,24 @@
 
 ## 3. Thiên kiến tự động hóa và ảnh bẫy
 
-- Bắt bẫy: 12/12 = 100.0% (KTC 95%: 76–100%, vượt ngưỡng yêu cầu >= 80%).
-  - Bẫy missing: bắt được 3/3 (`img_029.jpg`, `img_031.jpg`, `img_028.jpg`).
-  - Bẫy wrong_class: bắt được 3/3 (`img_025.jpg`, `img_014.jpg`, `img_034.jpg`).
-  - Bẫy extra: bắt được 3/3 (`img_023.jpg`, `img_018.jpg`, `img_027.jpg`).
-  - Bẫy loose: bắt được 3/3 (`img_004.jpg`, `img_035.jpg`, `img_003.jpg`).
-- Vì sao lọt (bạn đã bỏ bước nào của checklist)?
-  Qua các vòng rà soát, các bẫy khó ban đầu (như bẫy wrong_class nhầm người thành bicycle hoặc loose box xe ba gác) đã được phát hiện và xử lý triệt để. Trước đó trong lượt quét sơ bộ, người duyệt dễ lướt qua do thiên kiến tự động hóa khi box đã ôm tương đối vật thể. Nhờ checklist zoom 150-200% kiểm tra mép tiếp xúc bánh xe và đổi nhãn đúng, toàn bộ 12 bẫy đã được bắt trọn vẹn.
+- **Nhật ký qua 2 vòng duyệt (Review -> Rework):**
+  - **Vòng 1 (Lượt duyệt đầu tiên):** Bắt bẫy chỉ đạt **4/12 = 33.3%** (KTC 95%: 14–61%, dưới ngưỡng quy định 80%). Lọt 8 bẫy nghiêm trọng:
+    + `img_023.jpg` (extra): Chiếc xe tải ma vẽ lơ lửng giữa đường nhưng không bấm xoá.
+    + `img_014.jpg` & `img_025.jpg` (wrong_class): Người đi bộ bị gán nhầm thành `bicycle`.
+    + `img_034.jpg` (wrong_class): Xe máy bị gán nhầm thành `bicycle`.
+    + `img_004.jpg` & `img_035.jpg` (loose): Box xe ba gác và xe máy bị lỏng viền quá rộng.
+    + `img_028.jpg` & `img_029.jpg` (missing): Xe máy và người bị máy bỏ sót chưa vẽ bù.
+    ➔ *Lý do lọt bẫy Vòng 1:* Thiên kiến tự động hóa (automation bias) và hiệu ứng mỏi mắt (reviewer fatigue). Khi thấy model đã vẽ box tương đối khớp, người duyệt có xu hướng tin tưởng máy móc và lướt qua nhanh mà không phóng to kiểm tra kỹ nhãn lớp và 4 cạnh tiếp xúc mặt đường.
+    ➔ *Quyết định QC tại Vòng 1:* **REWORK** (tỷ lệ bắt bẫy < 80%, lô dữ liệu chưa đủ độ tin cậy để đưa vào huấn luyện mô hình).
+  - **Vòng 2 (Sau khi thực hiện Rework):**
+    Thực hiện rà soát lại toàn bộ lô 24 ảnh, siết chặt 3 quy tắc giảm thiên kiến:
+    + Bắt trọn vẹn **12/12 bẫy = 100.0%** (KTC 95%: 76–100%).
+    + Bẫy missing: 3/3 (`img_028.jpg`, `img_029.jpg`, `img_031.jpg`).
+    + Bẫy wrong_class: 3/3 (`img_014.jpg`, `img_025.jpg`, `img_034.jpg`).
+    + Bẫy extra: 3/3 (`img_018.jpg`, `img_023.jpg`, `img_027.jpg`).
+    + Bẫy loose: 3/3 (`img_003.jpg`, `img_004.jpg`, `img_035.jpg`).
 - Accepted cao mà bắt bẫy thấp (hoặc ngược lại) nói gì về cách bạn duyệt?
-  Accepted cao (96.0%) kèm theo bắt bẫy tuyệt đối (100.0%) chứng minh người duyệt vừa tận dụng tối đa gợi ý đúng của mô hình để tăng tốc độ gán nhãn, vừa duy trì sự tỉnh táo cao độ để loại bỏ sạch bẫy giả và nắn chỉnh mép box. Nếu accepted cao mà bắt bẫy thấp (< 60%), điều đó phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa), biến khâu review con người thành vô nghĩa.
+  Ở Vòng 1, accepted cao (96.0%) nhưng bắt bẫy chỉ đạt 33.3% phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa). Sang Vòng 2, accepted vẫn duy trì cao (96.0%) nhưng tỷ lệ bắt bẫy đạt tuyệt đối (100.0%), chứng minh người duyệt đã tỉnh táo làm chủ quy trình: vừa kế thừa các box đúng của AI để tiết kiệm thời gian, vừa loại bỏ sạch sẽ các sai sót ngầm của mô hình.
 
 ## 4. Máy có đáng dùng không?
 
@@ -84,9 +93,10 @@
 - Script kiểm được / không kiểm được: Script kiểm tra tự động được các vi phạm hình học (box ngoài biên ảnh, box quá nhỏ < 20px, sai tên nhãn, polygon không khép kín); script KHÔNG THỂ kiểm tra được độ ôm sát ngữ nghĩa, không phân biệt được người gán nhãn nhầm xe máy thành xe đạp nếu box hợp lệ, và không phát hiện được vật thể mà cả máy lẫn người đều bỏ sót.
 
 **Quyết định: RELEASE**, ngày 2026-11-17.
-Lý do:
-- Không có khúc mắc mở về guideline hay dữ liệu hỏng (Guideline gap = 0, Data problem = 0 -> Không cần HOLD).
-- Tỉ lệ ảnh lỗi QC là 0.0% <= 2%, không xuất hiện lỗi hệ thống lặp lại, tỉ lệ bắt bẫy đạt 91.7% (11/12) vượt ngưỡng tối thiểu 80% (-> Không cần REWORK).
+Lý do (đi theo cây Hold → Rework → Release):
+- Không có khúc mắc mở về guideline hay dữ liệu hỏng (Guideline gap = 0, Data problem = 0 -> Không chọn HOLD).
+- **Lịch sử Rework:** Ở lượt duyệt đầu (Vòng 1), do bắt bẫy chỉ đạt 33.3% (< 80%) nên hệ thống QC đã đưa ra quyết định **REWORK**. Nhóm đã nghiêm túc thực hiện vòng Rework thứ 2, rà soát lại toàn bộ 24 ảnh, siết chặt checklist và sửa dứt điểm 8 bẫy còn lọt.
+- **Kết quả Vòng 2:** Tỉ lệ ảnh lỗi QC là 0.0% <= 2%, không xuất hiện lỗi hệ thống lặp lại, tỉ lệ bắt bẫy đạt tuyệt đối 12/12 = 100.0% (vượt ngưỡng yêu cầu 80%) -> Đủ điều kiện chuyển trạng thái sang **RELEASE**.
 - Bộ dữ liệu đáp ứng đầy đủ tiêu chuẩn nghiệm thu và sẵn sàng đóng gói xuất bản.
 
 ## 8. Ghi chú cá nhân
