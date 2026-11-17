@@ -1,0 +1,89 @@
+{
+ "mode": "det",
+ "images": 24,
+ "pre_boxes": 480,
+ "final_objects": 473,
+ "accepted": 446,
+ "edited": 26,
+ "deleted": 0,
+ "added": 1,
+ "class_changed_info": 0,
+ "accepted_rate": 0.9291666666666667,
+ "edited_rate": 0.05416666666666667,
+ "deleted_rate": 0.0,
+ "added_rate": 0.0021141649048625794,
+ "per_class": {
+  "three_wheeler": {
+   "accepted": 29,
+   "edited": 2
+  },
+  "person": {
+   "accepted": 242,
+   "edited": 16,
+   "added": 1
+  },
+  "motorbike": {
+   "accepted": 124,
+   "edited": 3
+  },
+  "truck": {
+   "accepted": 5,
+   "edited": 2
+  },
+  "bicycle": {
+   "accepted": 7,
+   "edited": 1
+  },
+  "car": {
+   "accepted": 36,
+   "edited": 2
+  },
+  "bus": {
+   "accepted": 3
+  }
+ },
+ "gold": {
+  "images": 4,
+  "gold_objects": 45,
+  "pre": {
+   "tp": 39,
+   "fp": 28,
+   "fn": 6,
+   "precision": 0.582089552238806,
+   "recall": 0.8666666666666667
+  },
+  "final": null,
+  "residual_errors": null,
+  "new_errors": null
+ },
+ "traps": {
+  "n": 12,
+  "caught": 11,
+  "rate": 0.9166666666666666,
+  "by_type": {
+   "missing": [
+    3,
+    3
+   ],
+   "wrong_class": [
+    3,
+    3
+   ],
+   "loose": [
+    2,
+    3
+   ],
+   "extra": [
+    3,
+    3
+   ]
+  },
+  "missed": [
+   [
+    "img_003.jpg",
+    "loose"
+   ]
+  ]
+ },
+ "accept_threshold": 0.9
+}

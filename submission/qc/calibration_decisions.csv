@@ -1,1 +1,5 @@
 case_id,image,nguon,van_de,quyet_dinh,quy_tac_ghi_vao_guideline,phien_ban_guideline
+CAL-01,img_013,loi_may,"YOLO26 nhầm xe tuk-tuk 3 bánh thành car do mui kín","Luôn gán three_wheeler theo số bánh và kết cấu xe","Mục 2.1: Xe ba bánh có mui che chở khách vẫn gán three_wheeler không gán car",v1.1
+CAL-02,img_004,cau_hoi_mo,"Xe đạp điện và xe máy điện nhỏ gán bicycle hay motorbike","Có bàn đạp cơ gán bicycle; kiểu dáng xe máy điện/scooter gán motorbike","Mục 6.1: Xe đạp điện trợ lực có bàn đạp là bicycle; xe máy điện là motorbike",v1.1
+CAL-03,img_018,cau_hoi_mo,"Khối xe máy đỗ dày đặc che khuất phức tạp ở lề đường","Dùng ignore_region bao quanh cụm xe nếu các xe nhỏ hơn 20px hoặc chồng lấn không tách rời","Mục 6.2: Cụm xe máy chen chúc che lấp >80% vẽ 1 ignore_region bao ngoài",v1.1
+CAL-04,img_003,bay_lot,"Bẫy loose trên xe ba gác bị lọt do mắt người dễ bỏ qua viền xe khi xe bị che một phần","Siết checklist review: kiểm tra 4 mép viền ngoài cùng của xe (bánh xe và tay lái)","Mục 4.1: Box ba bánh phải ôm sát bánh trước và đuôi xe không chừa khoảng hở",v1.1
