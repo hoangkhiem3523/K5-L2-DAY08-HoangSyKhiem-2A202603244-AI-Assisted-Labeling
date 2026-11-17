@@ -5,7 +5,7 @@
 - Lớp (L2 / L3 / khác): L2
 - Tài khoản GitHub: hoangkhiem3523
 - Repo bài nộp (URL): https://github.com/hoangkhiem3523/K5-L2-DAY08-HoangSyKhiem-2A202603244-AI-Assisted-Labeling
-- Commit chốt bài (hash): 9fb8628
+- Commit chốt bài (hash): 817727a
 - Máy: Windows 11, GPU NVIDIA GeForce RTX 3050 Laptop GPU (CUDA)
 - CVAT (Docker): v2.74.1 (Docker local)
 
