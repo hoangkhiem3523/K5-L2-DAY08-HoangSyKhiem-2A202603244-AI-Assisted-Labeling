@@ -1,13 +1,13 @@
 # Thông tin học viên
 
-- Họ và tên: <<>>
-- MSHV: <<>>
-- Lớp (L2 / L3 / khác): <<>>
-- Tài khoản GitHub: <<>>
-- Repo bài nộp (URL): <<>>
-- Commit chốt bài (hash): <<>>
-- Máy: <<hệ điều hành, GPU (CUDA / MPS / không có)>>
-- CVAT (Docker): <<phiên bản, ví dụ v2.81.0>>
+- Họ và tên: Hoàng Sỹ Khiêm
+- MSHV: 2A202603244
+- Lớp (L2 / L3 / khác): L2
+- Tài khoản GitHub: hoangkhiem3523
+- Repo bài nộp (URL): https://github.com/hoangkhiem3523/K5-L2-DAY08-HoangSyKhiem-2A202603244-AI-Assisted-Labeling
+- Commit chốt bài (hash):
+- Máy: Windows 11, GPU NVIDIA GeForce RTX 3050 Laptop GPU (CUDA)
+- CVAT (Docker): v2.74.1 (Docker local)
 
 ## Kết quả tóm tắt (điền cuối bài; số lấy từ `submission/qc/*`, kèm mẫu số)
 
