@@ -1,28 +1,28 @@
 # Số đo review (det)
 
-- Ảnh tính: 24 (batch,gold); box máy: 480; đối tượng sau duyệt: 487; ngưỡng accepted: IoU >= 0.9
-- Đã **loại 24 đối tượng nằm quanh các bẫy** khỏi bảng này: lỗi nhân tạo không phản ánh chất lượng máy.
+- Ảnh tính: 24 (batch,gold); box máy: 480; đối tượng sau duyệt: 491; ngưỡng accepted: IoU >= 0.9
+- Đã **loại 22 đối tượng nằm quanh các bẫy** khỏi bảng này: lỗi nhân tạo không phản ánh chất lượng máy.
 
 ## 1. Bốn trạng thái (AI error profile)
 | Trạng thái | Số | Tỉ lệ | Mẫu số |
 |---|---|---|---|
-| accepted (giữ nguyên) | 461 | 461/480 = 96.0% | 480 box máy |
-| edited (sửa) | 5 | 5/480 = 1.0% | 480 box máy |
-| deleted (xoá) | 14 | 14/480 = 2.9% | 480 box máy |
-| added (vẽ thêm) | 21 | 21/487 = 4.3% | 487 đối tượng sau duyệt |
+| accepted (giữ nguyên) | 446 | 446/480 = 92.9% | 480 box máy |
+| edited (sửa) | 9 | 9/480 = 1.9% | 480 box máy |
+| deleted (xoá) | 25 | 25/480 = 5.2% | 480 box máy |
+| added (vẽ thêm) | 36 | 36/491 = 7.3% | 491 đối tượng sau duyệt |
 
-Trong số deleted + added, **1 trường hợp là đổi lớp** (máy gán sai lớp, box đúng chỗ): đó không phải máy bỏ sót. Số vật máy **sót thật** ≈ added − đổi lớp = 20.
+Trong số deleted + added, **2 trường hợp là đổi lớp** (máy gán sai lớp, box đúng chỗ): đó không phải máy bỏ sót. Số vật máy **sót thật** ≈ added − đổi lớp = 34.
 
 ### Theo lớp
 | Lớp | accepted | edited | deleted | added |
 |---|---|---|---|---|
-| person | 254 | 3 | 3 | 2 |
+| person | 253 | 4 | 3 | 9 |
 | bicycle | 6 | 0 | 3 | 2 |
-| motorbike | 130 | 1 | 0 | 1 |
-| car | 37 | 0 | 2 | 13 |
+| motorbike | 128 | 1 | 2 | 6 |
+| car | 37 | 0 | 2 | 15 |
 | bus | 3 | 0 | 0 | 0 |
-| truck | 5 | 0 | 2 | 0 |
-| three_wheeler | 26 | 1 | 4 | 3 |
+| truck | 5 | 0 | 2 | 1 |
+| three_wheeler | 14 | 4 | 13 | 3 |
 
 ## 2. So với gold (nhãn gán tay từ đầu)
 Ảnh gold: 4; đối tượng gold: 48 (mẫu số của recall)
@@ -36,11 +36,12 @@ Trong số deleted + added, **1 trường hợp là đổi lớp** (máy gán sa
 (Ảnh gold không nằm trong nhãn sau duyệt: không tính residual / new error. Đó là chủ ý: duyệt lại ảnh bạn vừa tự gán tay sẽ đo trí nhớ, không đo thiên kiến.)
 
 ## 3. Ảnh bẫy
-- Bắt được 12/12 = 100.0% (KTC 95%: 76–100%) (ngưỡng đạt: 80%). Chỉ 12 bẫy nên khoảng tin cậy rất rộng: đọc cùng danh sách bẫy lọt, đừng kết luận chỉ từ %.
-  - missing: 3/3
+- Bắt được 10/12 = 83.3% (KTC 95%: 55–95%) (ngưỡng đạt: 80%). Chỉ 12 bẫy nên khoảng tin cậy rất rộng: đọc cùng danh sách bẫy lọt, đừng kết luận chỉ từ %.
+  - missing: 1/3
   - wrong_class: 3/3
   - loose: 3/3
   - extra: 3/3
+  - lọt: img_029.jpg (missing), img_028.jpg (missing)
 
 ## Gợi ý đọc số
 - `deleted` cao → ngưỡng thấp hoặc ánh xạ nhãn sai; `added` cao → máy bỏ sót (xem lớp nào);

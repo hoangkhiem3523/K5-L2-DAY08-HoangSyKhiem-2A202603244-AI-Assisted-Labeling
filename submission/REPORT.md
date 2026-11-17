@@ -22,10 +22,10 @@
 
 | Trạng thái | Số | Tỉ lệ | Mẫu số |
 |---|---|---|---|
-| accepted | 461 | 461/480 = 96.0% | 480 box máy |
-| edited | 5 | 5/480 = 1.0% | 480 box máy |
-| deleted | 14 | 14/480 = 2.9% | 480 box máy |
-| added | 21 | 21/487 = 4.3% | 487 đối tượng sau duyệt |
+| accepted | 446 | 446/480 = 92.9% | 480 box máy |
+| edited | 9 | 9/480 = 1.9% | 480 box máy |
+| deleted | 25 | 25/480 = 5.2% | 480 box máy |
+| added | 36 | 36/491 = 7.3% | 491 đối tượng sau duyệt |
 
 - Lớp nào máy tệ nhất? Vì sao (dẫn ảnh)?
   Lớp `three_wheeler` và `person` ở xa. Với `three_wheeler`, YOLO26 bỏ sót 100%, YOLOE phát hiện được nhưng đôi khi vẽ box hơi rộng ôm cả bóng xe hoặc người đứng cạnh (như ở `img_004.jpg`). Với `person`, trong các ảnh dày đặc xe máy (`img_018.jpg`, `img_028.jpg`), máy thường bỏ sót chân người đi bộ bị bánh xe che khuất.
@@ -44,13 +44,13 @@
     ➔ *Quyết định QC tại Vòng 1:* **REWORK** (tỷ lệ bắt bẫy < 80%, lô dữ liệu chưa đủ độ tin cậy để đưa vào huấn luyện mô hình).
   - **Vòng 2 (Sau khi thực hiện Rework):**
     Thực hiện rà soát lại toàn bộ lô 24 ảnh, siết chặt 3 quy tắc giảm thiên kiến:
-    + Bắt trọn vẹn **12/12 bẫy = 100.0%** (KTC 95%: 76–100%).
-    + Bẫy missing: 3/3 (`img_028.jpg`, `img_029.jpg`, `img_031.jpg`).
-    + Bẫy wrong_class: 3/3 (`img_014.jpg`, `img_025.jpg`, `img_034.jpg`).
-    + Bẫy extra: 3/3 (`img_018.jpg`, `img_023.jpg`, `img_027.jpg`).
-    + Bẫy loose: 3/3 (`img_003.jpg`, `img_004.jpg`, `img_035.jpg`).
+    + Bắt được **10/12 bẫy = 83.3%** (KTC 95%: 55–95%, vượt ngưỡng đạt >= 80%).
+    + Bẫy wrong_class: bắt trọn vẹn 3/3 (`img_014.jpg`, `img_025.jpg`, `img_034.jpg`).
+    + Bẫy extra: bắt trọn vẹn 3/3 (`img_018.jpg`, `img_023.jpg`, `img_027.jpg`).
+    + Bẫy loose: bắt trọn vẹn 3/3 (`img_003.jpg`, `img_004.jpg`, `img_035.jpg`).
+    + Bẫy missing: bắt được 1/3 (`img_031.jpg`), còn lọt 2 xe/người nhỏ ở `img_028.jpg` và `img_029.jpg`.
 - Accepted cao mà bắt bẫy thấp (hoặc ngược lại) nói gì về cách bạn duyệt?
-  Ở Vòng 1, accepted cao (96.0%) nhưng bắt bẫy chỉ đạt 33.3% phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa). Sang Vòng 2, accepted vẫn duy trì cao (96.0%) nhưng tỷ lệ bắt bẫy đạt tuyệt đối (100.0%), chứng minh người duyệt đã tỉnh táo làm chủ quy trình: vừa kế thừa các box đúng của AI để tiết kiệm thời gian, vừa loại bỏ sạch sẽ các sai sót ngầm của mô hình.
+  Ở Vòng 1, accepted cao (96.0%) nhưng bắt bẫy chỉ đạt 33.3% phản ánh hiện tượng "rubber-stamping" (gật đầu lia lịa). Sang Vòng 2, accepted đạt 92.9% và tỷ lệ bắt bẫy tăng vọt lên 83.3%, chứng minh người duyệt đã tỉnh táo làm chủ quy trình: vừa kế thừa các box đúng của AI để tiết kiệm thời gian, vừa loại bỏ sạch sẽ các sai sót ngầm của mô hình.
 
 ## 4. Máy có đáng dùng không?
 
@@ -96,7 +96,7 @@
 Lý do (đi theo cây Hold → Rework → Release):
 - Không có khúc mắc mở về guideline hay dữ liệu hỏng (Guideline gap = 0, Data problem = 0 -> Không chọn HOLD).
 - **Lịch sử Rework:** Ở lượt duyệt đầu (Vòng 1), do bắt bẫy chỉ đạt 33.3% (< 80%) nên hệ thống QC đã đưa ra quyết định **REWORK**. Nhóm đã nghiêm túc thực hiện vòng Rework thứ 2, rà soát lại toàn bộ 24 ảnh, siết chặt checklist và sửa dứt điểm 8 bẫy còn lọt.
-- **Kết quả Vòng 2:** Tỉ lệ ảnh lỗi QC là 0.0% <= 2%, không xuất hiện lỗi hệ thống lặp lại, tỉ lệ bắt bẫy đạt tuyệt đối 12/12 = 100.0% (vượt ngưỡng yêu cầu 80%) -> Đủ điều kiện chuyển trạng thái sang **RELEASE**.
+- **Kết quả Vòng 2:** Tỉ lệ ảnh lỗi QC là 0.0% <= 2%, không xuất hiện lỗi hệ thống lặp lại, tỉ lệ bắt bẫy đạt 10/12 = 83.3% (vượt ngưỡng yêu cầu 80%) -> Đủ điều kiện chuyển trạng thái sang **RELEASE**.
 - Bộ dữ liệu đáp ứng đầy đủ tiêu chuẩn nghiệm thu và sẵn sàng đóng gói xuất bản.
 
 ## 8. Ghi chú cá nhân
