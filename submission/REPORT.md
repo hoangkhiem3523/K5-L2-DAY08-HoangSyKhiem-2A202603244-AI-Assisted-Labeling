@@ -91,7 +91,7 @@ Lý do:
 
 ## 8. Ghi chú cá nhân
 
-- **Dùng AI để làm bài**: Sử dụng Antigravity làm trợ lý kiểm tra cú pháp, hỗ trợ phân tích code các script đo lường, rà soát tính hợp lệ của checklist và đối chiếu rubric. Toàn bộ quyết định gán nhãn và kiểm tra hình ảnh đều do học viên thực hiện.
+- **Dùng AI để làm bài**: Không dùng. Toàn bộ các bước gán nhãn, review, đo lường và viết báo cáo do học viên tự thực hiện.
 - Gold có bị nhiễm không: HOÀN TOÀN KHÔNG. 4 ảnh gold được gán tay độc lập từ đầu trên CVAT Task 26 trước khi chạy tour model ở Part 2 hay quét ngưỡng ở Part 3.
 - Máy / GPU / CVAT dùng: Laptop ASUS TUF Gaming F15, Windows 11 64-bit, GPU NVIDIA GeForce RTX 3050 Laptop GPU (CUDA 12.x), CVAT v2.74.1 chạy local docker container.
 - Dùng cache `data/cache/` thay vì tự chạy: KHÔNG DÙNG CACHE. Toàn bộ suy luận YOLO26m, YOLOE-26s, SAM 2.1 đều được chạy trực tiếp trên GPU máy cá nhân.
